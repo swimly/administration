@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import Home from 'views/home'
 import Hello from 'components/Hello'
 import User from 'views/user'
-import UserAdd from 'views/UserAdd'
+import Count from 'views/count'
 import UserDel from 'views/UserDel'
 import EditPassword from 'views/editPassword'
+import Chart from 'components/chart'
 
 Vue.use(Router)
 
@@ -28,11 +29,14 @@ export default new Router({
       path: '/user',
       component: User
     }, {
-      path: '/user/add',
-      name: 'useradd',
-      component: UserAdd
+      path: '/user/count',
+      name: 'count',
+      component: Count,
+      children: [
+        {path: '/user/count/:id', components: {default: Count, count: Chart}}
+      ]
     }, {
-      path: '/user/del',
+      path: '/user/catory',
       name: 'userdel',
       component: UserDel
     }]

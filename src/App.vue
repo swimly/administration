@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <app-header :logo="logo" :nav="nav" :user="user"></app-header>
     <app-aside :menu="menu"></app-aside>
-    <router-view></router-view>
+    <router-view class="main"></router-view>
   </div>
 </template>
 
@@ -29,14 +29,33 @@ export default {
         url: '/logout'
       }],
       menu: [{
+        text: '首页',
+        url: '/'
+      }, {
         text: '用户管理',
-        url: '/user',
+        url: '',
         sub: [{
-          text: '添加',
-          url: '/user/add'
+          text: '统计',
+          url: '/user/count'
         }, {
-          text: '删除',
-          url: '/user/del'
+          text: '分类',
+          url: '/user/catory'
+        }, {
+          text: '列表',
+          url: '/user/list'
+        }]
+      }, {
+        text: '项目管理',
+        url: '',
+        sub: [{
+          text: '分类',
+          url: '/project/catory'
+        }, {
+          text: '统计',
+          url: '/project/count'
+        }, {
+          text: '列表',
+          url: '/project/list'
         }]
       }]
     }
@@ -45,4 +64,17 @@ export default {
 </script>
 
 <style>
+html{font-size:62.5%;}
+html,body{height:100%;margin:0;font-family:"Microsoft YaHei"}
+h1,h2,h3,h4,h5,h6,p{margin:0;}
+ul,li,dt,dl,dd{padding:0;margin:0;list-style:none;}
+a{text-decoration:none;}
+*{box-sizing:border-box;}
+.app{height:100%;width:100%;padding:80px 0 0 200px;}
+.main{display:inline-block;}
+.row{display:inline-table;}
+.col{display:table-cell;}
+.w{width:100%;}.h{height:100%;}
+.v-t{vertical-align: top;}.v-m{vertical-align: middle;}.v-b{vertical-align: bottom;}
+.t-l{text-align:left;}.t-c{text-align:center;}.t-r{text-align:right;}
 </style>
