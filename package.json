@@ -15,6 +15,7 @@
   "dependencies": {
     "echarts": "^3.4.0",
     "vue": "^2.1.10",
+    "vue-baidu-map": "0.0.6",
     "vue-perfect-scrollbar": "0.0.7",
     "vue-router": "^2.2.0",
     "vuex": "^2.1.2"

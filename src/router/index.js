@@ -27,6 +27,7 @@ export default new Router({
     }, {
       name: 'user',
       path: '/user',
+      redirect: '/user/cout/area',
       component: User
     }, {
       path: '/user/count',
