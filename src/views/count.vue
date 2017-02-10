@@ -1,7 +1,7 @@
 <template>
-  <div class="count">
+  <div class="count h">
     <my-tab :data="data"></my-tab>
-    <router-view name="count"></router-view>
+    <router-view name="count" class="h"></router-view>
   </div>
 </template>
 <script>

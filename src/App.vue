@@ -70,8 +70,8 @@ h1,h2,h3,h4,h5,h6,p{margin:0;}
 ul,li,dt,dl,dd{padding:0;margin:0;list-style:none;}
 a{text-decoration:none;}
 *{box-sizing:border-box;}
-.app{height:100%;width:100%;padding:80px 0 0 200px;}
-.main{display:inline-block;}
+.app{height:100%;width:100%;padding:80px 0 0 200px;overflow:hidden;}
+.main{display:inline-block;width:100%;height:100%;overflow:auto;}
 .row{display:inline-table;}
 .col{display:table-cell;}
 .w{width:100%;}.h{height:100%;}

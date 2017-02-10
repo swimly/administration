@@ -1,20 +1,33 @@
 <template>
-  <div class="chart">
+  <div class="chart" id="main">
   </div>
 </template>
 <script>
-import ECharts from 'vue-echarts/components/ECharts.vue'
-import 'echarts/lib/chart/bar'
-import 'echarts/lib/chart/line'
-import 'echarts/lib/component/tooltip'
+import echarts from 'echarts/lib/echarts'
+import bar from 'echarts/lib/chart/bar'
 export default {
-  components: {
-    'chart': ECharts
+  data () {
+    return {
+      msg: 'echarts'
+    }
+  },
+  mounted () {
+    var myChart = echarts.init(document.getElementById('main'))
+    myChart.setOption({
+      title: { text: 'ECharts 入门示例' },
+      tooltip: {},
+      xAxis: {
+        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    })
   }
 }
 </script>
 <style>
-.echarts {
-  height: 300px;
-}
 </style>
