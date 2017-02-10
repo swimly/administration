@@ -45,9 +45,57 @@ export default {
           url: '/user/list'
         }]
       }, {
+        text: '用户管理',
+        url: '',
+        sub: [{
+          text: '统计',
+          url: '/user/count'
+        }, {
+          text: '分类',
+          url: '/user/catory'
+        }, {
+          text: '列表',
+          url: '/user/list'
+        }]
+      }, {
+        text: '用户管理',
+        url: '',
+        sub: [{
+          text: '统计',
+          url: '/user/count'
+        }, {
+          text: '分类',
+          url: '/user/catory'
+        }, {
+          text: '列表',
+          url: '/user/list'
+        }]
+      }, {
         text: '项目管理',
         url: '',
         sub: [{
+          text: '分类',
+          url: '/project/catory'
+        }, {
+          text: '统计',
+          url: '/project/count'
+        }, {
+          text: '列表',
+          url: '/project/list'
+        }]
+      }, {
+        text: '项目管理',
+        url: '',
+        sub: [{
+          text: '分类',
+          url: '/project/catory'
+        }, {
+          text: '统计',
+          url: '/project/count'
+        }, {
+          text: '列表',
+          url: '/project/list'
+        }, {
           text: '分类',
           url: '/project/catory'
         }, {

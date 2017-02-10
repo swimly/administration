@@ -31,6 +31,7 @@ export default new Router({
     }, {
       path: '/user/count',
       name: 'count',
+      redirect: '/user/count/1',
       component: Count,
       children: [
         {path: '/user/count/:id', components: {default: Count, count: Chart}}

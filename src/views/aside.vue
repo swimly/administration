@@ -1,19 +1,25 @@
 <template>
   <div class="aside">
-    <ul class="menu">
-      <li v-for="item in menu">
-        <router-link class="parent" :to="item.url" v-text="item.text"></router-link>
-        <div v-if="item.sub" class="sub">
-          <router-link class="son" v-for="item in item.sub" v-text="item.text" :to="item.url" ></router-link>
-        </div>
-      </li>
-    </ul>
+    <VuePerfectScrollbar class="scroll-area h" v-once :settings="settings" @ps-scroll-y="scrollHanle">
+      <ul class="menu">
+        <li v-for="item in menu">
+          <router-link class="parent" :to="item.url" v-text="item.text"></router-link>
+          <div v-if="item.sub" class="sub">
+            <router-link class="son" v-for="item in item.sub" v-text="item.text" :to="item.url" ></router-link>
+          </div>
+        </li>
+      </ul>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 export default {
   name: 'header',
+  components: {
+    VuePerfectScrollbar
+  },
   props: {
     menu: {
       type: Array,
@@ -22,7 +28,15 @@ export default {
   },
   data () {
     return {
-      msg: 'aside'
+      msg: 'aside',
+      settings: {
+        minScrollbarLength: 60
+      }
+    }
+  },
+  methods: {
+    scrollHanle(evt) {
+      console.log(evt)
     }
   }
 }
@@ -35,4 +49,6 @@ export default {
 .menu .sub{padding:1em;background:#3F73B8;border-bottom:1px solid #5E91D0;}
 .menu .sub .son{display:block;font-size:1.3em;color:#b8dbff;padding:0.5em 1em;}
 .menu .sub .router-link-active{color:#fff;}
+.scroll-area {position: relative;}
+.ps-container>.ps-scrollbar-y-rail{width:6px;}
 </style>
