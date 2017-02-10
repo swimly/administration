@@ -15,16 +15,16 @@ export default {
     return {
       data:[{
         text: '地区',
-        'url': '/user/count/1'
+        'url': '/user/count/area'
       }, {
         text: '性别',
-        'url': '/user/count/2'
+        'url': '/user/count/sex'
       }, {
         text: '领域',
-        'url': '/user/count/3'
+        'url': '/user/count/moment'
       }, {
         text: '活跃程度',
-        'url': '/user/count/4'
+        'url': '/user/count/live'
       }]
     }
   }
