@@ -1,6 +1,6 @@
 <template>
-  <div class="deluser">
-    <h1>删除用户</h1>
+  <div class="adduser">
+    <h1>用户列表</h1>
   </div>
 </template>
 

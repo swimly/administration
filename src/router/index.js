@@ -4,9 +4,12 @@ import Home from 'views/home'
 import Hello from 'components/Hello'
 import User from 'views/user'
 import Count from 'views/count'
-import UserDel from 'views/UserDel'
+import UserCatory from 'views/userCatory'
 import EditPassword from 'views/editPassword'
+import UserList from 'views/userList'
 import Chart from 'components/chart'
+import DatabaseList from 'views/databaseList'
+import DatabaseSetting from 'views/databaseSetting'
 
 Vue.use(Router)
 
@@ -38,7 +41,19 @@ export default new Router({
       ]
     }, {
       path: '/user/catory',
-      name: 'userdel',
-      component: UserDel
+      name: 'usercatory',
+      component: UserCatory
+    }, {
+      path: '/user/list',
+      name: 'userlist',
+      component: UserList
+    }, {
+      path: '/database/list',
+      name: 'databaselist',
+      component: DatabaseList
+    }, {
+      path: '/database/setting',
+      name: 'databasesetting',
+      component: DatabaseSetting
     }]
 })
