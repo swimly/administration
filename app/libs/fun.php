@@ -14,6 +14,7 @@ function init($db,$tables,$prefix){
     foreach ($tables as $name => $fields) {
         $db->rawQuery("DROP TABLE ".$prefix.$name);
         createTable ($prefix.$name, $fields);
+        echo ($name.'创建完成！');
     }
 }
 ?>
