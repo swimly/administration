@@ -17,4 +17,8 @@ function init($db,$tables,$prefix){
         echo ($name.'创建完成！');
     }
 }
+function get_list($db,$tables,$prefix,$jsonp,$table){
+    $users=$db->get($prefix.$table);
+    echo $jsonp.'('.json_encode($users).')';
+}
 ?>
