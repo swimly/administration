@@ -2221,10 +2221,17 @@ class MysqliDb
      * @param array|string $fields Array or coma separated list of fields to fetch
      * @return array
      */
-    public function paginate ($table, $page, $fields = null) {
-        $offset = $this->pageLimit * ($page - 1);
-        $res = $this->withTotalCount()->get ($table, Array ($offset, $this->pageLimit), $fields);
-        $this->totalPages = ceil($this->totalCount / $this->pageLimit);
+    public function paginate ($table, $page, $pageSize, $fields = null) {
+        /*修改pagesize可以自定义*/
+        if(isset($pageSize)){
+            $offset = $pageSize * ($page - 1);
+            $res = $this->withTotalCount()->get ($table, Array ($offset, $pageSize), $fields);
+            $this->totalPages = ceil($this->totalCount / $pageSize);
+        }else{
+            $offset = $this->pageLimit * ($page - 1);
+            $res = $this->withTotalCount()->get ($table, Array ($offset, $this->pageLimit), $fields);
+            $this->totalPages = ceil($this->totalCount / $this->pageLimit);
+        }
         return $res;
     }
 

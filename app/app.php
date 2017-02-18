@@ -1,25 +1,23 @@
 <?
 //error_reporting (E_ALL|E_STRICT);
 header('Access-Control-Allow-Origin:*');/*允许跨域访问*/
-require_once ("libs/MysqliDb.php");
-require_once("libs/tables.php");
 require_once("libs/fun.php");
-$prefix = 'admin_';
-$db = new MysqliDb ('localhost', 'root', 'root', 'admin');
-if(!$db) die("Database error");
-$db->setTrace(true);
-$api=$_GET['api'];
-if(isset($_GET['callback'])){
-  $jsonp=$_GET["callback"];
-}else{
-  $jsonp="callback";
-}
-switch($api){
-  case 'init':
-    init($db,$tables,$prefix);
-  break;
-  case 'get_list':
-    get_list($db,$tables,$prefix,$jsonp,'users');
-  break;
-}
+// $api=$_GET['api'];
+// if(isset($_GET['callback'])){
+//   $jsonp=$_GET["callback"];
+// }else{
+//   $jsonp="callback";
+// }
+// switch($api){
+//   case 'init':
+//     init($db,$prefix);
+//   break;
+//   case 'get_list':
+//     $page=$_GET['page'];
+//     $pageSize=$_GET['pageSize'];
+//     get_list($db,$prefix,$jsonp,'users',$page,$pageSize);
+//   break;
+// }
+$link=new Link();
+$link->get_list('users',1);
 ?>
