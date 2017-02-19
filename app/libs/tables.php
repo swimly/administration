@@ -1,9 +1,9 @@
 <?
 $tables = Array (
     'users' => Array (
-        'login' => 'char(10) not null',
-        'number'=> 'char(6) not null',
-        'username'=> 'char(10)',
+        'login' => 'char(10)',
+        'number'=> 'char(6)',
+        'username'=> 'char(10) not null',
         'face'=> 'char(30)',
         'address'=> 'char(50)',
         'phone'=> 'char(11)',
@@ -14,7 +14,7 @@ $tables = Array (
         'depart'=> 'int(2)',
         'position'=> 'int(2)',
         'name'=> 'char(10)',
-        'password'=> 'char(15)',
+        'password'=> 'char(50)',
         'regTime'=> 'datetime',
         'joinTime'=> 'datetime',
         'birthday'=> 'datetime',
