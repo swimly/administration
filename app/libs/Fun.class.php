@@ -64,16 +64,20 @@ class App{
     }
     public function Login($table){
         $data=$this->getParams();
-        var_dump($data);
         foreach($data as $key=>$value){
-            if($key=='password'){
-               $this->db->where($key,md5($value)); 
-            }else{
-                $this->db->where($key,$value);
-            }
+            $this->db->where($key,$value);
         }
-        $result=$this->db->get($this->prefix.$table);
-        var_dump($result);
+        $id=$this->db->has($this->prefix.$table);
+        if($id){
+            $result=array(
+                'result'=>$id
+            );
+        }else{
+            $result=array(
+                'result'=>false
+            );
+        }
+        echo $this->jsonp.'('.json_encode($result).')';
     }
 }
 $app=new App();
