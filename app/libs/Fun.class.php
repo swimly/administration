@@ -49,7 +49,7 @@ class App{
         $users=$this->db->paginate($this->prefix.$table,$this->params['page'],$this->params['pageSize']);
         echo $this->jsonp.'('.json_encode($users).')';
     }
-    public function Register($table){
+    public function Insert($table){
         $id=$this->db->insert($this->prefix.$table,$this->params);
         if($id){
             $result=array(
