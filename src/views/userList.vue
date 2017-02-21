@@ -26,7 +26,7 @@
         <th>操作</th>
       </tr>
     </table>
-    <VuePerfectScrollbar class="scroll-area h" v-once :settings="settings" @ps-scroll-y="scrollHanle">
+    <div class="bd">
       <table class="list w">
         <colgroup>
           <col width="5%">
@@ -57,7 +57,7 @@
           </td>
         </tr>
       </table>
-    </VuePerfectScrollbar>
+    </div>
   </div>
 </template>
 

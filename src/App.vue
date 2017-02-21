@@ -105,4 +105,26 @@ a{text-decoration:none;}
 .btn:active{opacity:1;filter:alpha(opacity=100)}
 .btn-blue{background:#559EFE;}
 .btn-orange{background:#FF9900;}
+::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-color: #fff;
+    -webkit-border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:vertical
+{
+    height: 5px;
+    background-color: #ccc;
+    -webkit-border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:horizontal
+{
+    width: 5px;
+    background-color: #fff;
+    -webkit-border-radius: 5px;
+}
 </style>
