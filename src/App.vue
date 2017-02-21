@@ -105,5 +105,4 @@ a{text-decoration:none;}
 .btn:active{opacity:1;filter:alpha(opacity=100)}
 .btn-blue{background:#559EFE;}
 .btn-orange{background:#FF9900;}
-.content{padding:10px;}
 </style>
