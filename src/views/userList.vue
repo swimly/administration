@@ -58,6 +58,12 @@
         </tr>
       </table>
     </div>
+    <div class="fd row w">
+      <div class="col v-m t-r">
+        <a href="javascript:;" v-on:click="prev">上一页</a>
+        <a href="javascript:;" v-on:click="next">下一页</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -69,6 +75,8 @@ export default {
   data () {
     return {
       data: null,
+      page: 1,
+      pageSize: 20,
       settings: {
         minScrollbarLength: 60
       }
@@ -79,11 +87,21 @@ export default {
     VuePerfectScrollbar
   },
   created () {
-    this.list();
+    this.list()
   },
   methods: {
     scrollHanle(evt) {
       //console.log(evt)
+    },
+    next () {
+      this.page++
+      this.list()
+      console.log(this.page)
+    },
+    prev () {
+      this.page--
+      this.list()
+      console.log(this.page)
     },
     list: function () {
       this.$http.jsonp(config.service,{
@@ -93,8 +111,8 @@ export default {
           api: 'select',
           callback: 'callback',
           table: 'users',
-          page:1,
-          pageSize:20
+          page: this.page,
+          pageSize: this.pageSize
         },
         emulateJSON: true,
         before: function (req) {
@@ -117,9 +135,12 @@ export default {
 .list th{font-weight:normal;font-size:16px;color:#666;height:40px;background:#EDEDED;border:1px solid #eee;}
 .list td{font-size:14px;padding:0.8em 1em;color:#666;border:1px solid #eee;}
 .list tr:nth-child(odd){background:#f9f9f9;}
+.list tr:hover{background:#FCF7D6;}
 .content{padding:40px 0 40px 0;overflow:hidden;}
 .content .hd{margin-top:-40px;}
 .content .bd{height:100%;overflow:auto;}
+.content .fd{height:40px;border-top:1px solid #eee;}
+.content .fd a{font-size:14px;color:#999;padding:0 1em;}
 .list .iconfont{font-size:1.6em;color:#447DC8;margin:0 5px;}
 .scroll-area {position: relative;}
 .ps-container>.ps-scrollbar-y-rail{width:6px;}
