@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import css from '../assets/css/main.css'
+import font from '../assets/fonts/iconfont.css'
 export default {
   name: 'header',
   props: {

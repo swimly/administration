@@ -51,9 +51,9 @@
           <td v-text="item.browser" align="center"></td>
           <td v-text="item.email" align="center"></td>
           <td align="center">
-            <a href="javascript:;">查看</a>
-            <a href="javascript:;">编辑</a>
-            <a href="javascript:;">删除</a>
+            <a href="javascript:;" title="查看" class="iconfont icon-search"></a>
+            <a href="javascript:;" title="编辑" class="iconfont icon-edit"></a>
+            <a href="javascript:;" title="删除" class="iconfont icon-delete"></a>
           </td>
         </tr>
       </table>
@@ -120,6 +120,7 @@ export default {
 .content{padding:40px 0 40px 0;overflow:hidden;}
 .content .hd{margin-top:-40px;}
 .content .bd{height:100%;overflow:auto;}
+.list .iconfont{font-size:1.6em;color:#447DC8;margin:0 5px;}
 .scroll-area {position: relative;}
 .ps-container>.ps-scrollbar-y-rail{width:6px;}
 </style>
