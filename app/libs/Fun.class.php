@@ -19,7 +19,7 @@ class App{
     public function getParams(){
         $params=Array();
         foreach($_GET as $key=>$value){
-            if($key=='api' || $key=='table'){
+            if($key=='api' || $key=='table' || $key=='id'){
             }else{
                 $params[$key]=$value;
             }
@@ -32,7 +32,7 @@ class App{
     public function classify(){
         $params=Array();
         foreach($_GET as $key => $value){
-            if($key=='api' || $key=='page' || $key=='pageSize' || $key=='table'){
+            if($key=='api' || $key=='page' || $key=='pageSize' || $key=='table' || $key=='id'){
                 
             }else{
                 $params[$key]=$value;
@@ -141,6 +141,20 @@ class App{
         }else{
             $result=array(
                 'id'=>null
+            );
+        }
+        echo $this->jsonp.'('.json_encode($result).')';
+    }
+    public function Edit($callback){
+        $this->db->where('id',$_GET['id']);
+        $res=$this->db->update($this->prefix.$this->getTable(),$this->params);
+        if($res){
+            $result=array(
+                'res'=>$res
+            );
+        }else{
+            $result=array(
+                'res'=>false
             );
         }
         echo $this->jsonp.'('.json_encode($result).')';

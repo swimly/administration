@@ -11,13 +11,16 @@ switch($api){
     $condition=$app->classify();
     $app->Select($condition);
   break;
-  case 'register':
+  case 'add':
     $app->Insert(function(){
       
     });
   break;
   case 'check':
     $app->Check();
+  break;
+  case 'edit':
+    $app->Edit(function(){});
   break;
 }
 ?>
