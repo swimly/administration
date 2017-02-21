@@ -3,9 +3,9 @@
 所有数据请求都是app.php通过改变 ?api后面的参数调用不同的功能模块：
 ### 获取列表
 ```
-http://192.168.4.151/administration/app/app.php?api=get_list&page=1&pageSize=10&sex=1&table=users
+http://192.168.4.151/administration/app/app.php?api=select&page=1&pageSize=10&sex=1&table=users
 ```
-其中api=get_list代表获取列表，page表示第几页，pageSize表示每一页有多少条数据，table表示查询的哪个数据表，其他的例如sex表示查询sex=1的所有数据，当然也可以有多个条件。
+其中api=select代表获取列表，page表示第几页，pageSize表示每一页有多少条数据，table表示查询的哪个数据表，其他的例如sex表示查询sex=1的所有数据，当然也可以有多个条件。
 ### 更新查询
 ```
 http://192.168.4.151/administration/app/app.php?api=edit&id=1&sex=1&table=users
@@ -21,3 +21,7 @@ api=check表示对数据库进行条件查询，table=users表示查询的是use
 http://192.168.4.151/administration/app/app.php?api=add&username=browser&password=122514&email=979741120@qq.com&table=users
 ```
 api=add表示像数据库添加一条新数据，table表示向users表中插入，其他的字段都是向数据库插入的字段。
+### 删除数据
+```
+http://192.168.4.151/administration/app/app.php?api=delete&id=3&table=users
+```

@@ -7,20 +7,26 @@ switch($api){
   case 'init':
     $app->Init();
   break;
-  case 'get_list':
+  case 'select':
     $condition=$app->classify();
-    $app->Select($condition);
+    $value=$app->Select($condition);
+    echo $value;
   break;
   case 'add':
-    $app->Insert(function(){
-      
-    });
+    $value=$app->Insert();
+    echo $value;
   break;
   case 'check':
-    $app->Check();
+    $result=$app->Check();
+    echo $result;
   break;
   case 'edit':
-    $app->Edit(function(){});
+    $value=$app->Edit();
+    echo $value;
+  break;
+  case 'delete':
+    $value=$app->Delete();
+    echo $value;
   break;
 }
 ?>

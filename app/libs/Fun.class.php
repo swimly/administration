@@ -129,23 +129,22 @@ class App{
             $this->db->where($key,$value);
         }
         $users=$this->db->paginate($this->prefix.$this->getTable(),$this->params['page'],$this->params['pageSize']);
-        echo $this->jsonp.'('.json_encode($users).')';
+        return $this->jsonp.'('.json_encode($users).')';
     }
-    public function Insert($callback){
+    public function Insert(){
         $id=$this->db->insert($this->prefix.$this->getTable(),$this->params);
         if($id){
             $result=array(
                 'id'=>$id
             );
-            $callback();
         }else{
             $result=array(
                 'id'=>null
             );
         }
-        echo $this->jsonp.'('.json_encode($result).')';
+        return $this->jsonp.'('.json_encode($result).')';
     }
-    public function Edit($callback){
+    public function Edit(){
         $this->db->where('id',$_GET['id']);
         $res=$this->db->update($this->prefix.$this->getTable(),$this->params);
         if($res){
@@ -157,7 +156,20 @@ class App{
                 'res'=>false
             );
         }
-        echo $this->jsonp.'('.json_encode($result).')';
+        return $this->jsonp.'('.json_encode($result).')';
+    }
+    public function Delete(){
+        $this->db->where('id',$_GET['id']);
+        if($this->db->delete($this->prefix.$this->getTable())){
+            $result=array(
+                'res'=>true
+            );
+        }else{
+            $result=array(
+                'res'=>false
+            );
+        }
+        return $this->jsonp.'('.json_encode($result).')';
     }
     public function Check(){
         $data=$this->getParams();
@@ -174,7 +186,7 @@ class App{
                 'result'=>false
             );
         }
-        echo $this->jsonp.'('.json_encode($result).')';
+        return $this->jsonp.'('.json_encode($result).')';
     }
 }
 $app=new App();
