@@ -1,5 +1,5 @@
 <?
-error_reporting (E_ALL|E_STRICT);
+//error_reporting(0);
 header('Access-Control-Allow-Origin:*');/*允许跨域访问*/
 require_once("libs/Fun.class.php");
 $api=$_GET['api'];

@@ -19,7 +19,7 @@ class App{
     public function getParams(){
         $params=Array();
         foreach($_GET as $key=>$value){
-            if($key=='api' || $key=='table' || $key=='id'){
+            if($key=='api' || $key=='table' || $key=='id' || $key=='callback'){
             }else{
                 $params[$key]=$value;
             }
@@ -32,7 +32,7 @@ class App{
     public function classify(){
         $params=Array();
         foreach($_GET as $key => $value){
-            if($key=='api' || $key=='page' || $key=='pageSize' || $key=='table' || $key=='id'){
+            if($key=='api' || $key=='page' || $key=='pageSize' || $key=='table' || $key=='id' || $key=='callback'){
                 
             }else{
                 $params[$key]=$value;
