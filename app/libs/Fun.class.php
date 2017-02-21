@@ -19,7 +19,8 @@ class App{
     public function getParams(){
         $params=Array();
         foreach($_GET as $key=>$value){
-            if($key!='api'){
+            if($key=='api' || $key=='table'){
+            }else{
                 $params[$key]=$value;
             }
             if($key=='password'){
@@ -27,6 +28,26 @@ class App{
             }
         }
         return $params;
+    }
+    public function classify(){
+        $params=Array();
+        foreach($_GET as $key => $value){
+            if($key=='api' || $key=='page' || $key=='pageSize' || $key=='table'){
+                
+            }else{
+                $params[$key]=$value;
+            }
+        }
+        return $params;
+    }
+    public function getTable(){
+        $table='';
+        foreach($_GET as $key => $value){
+            if($key=='table'){
+                $table=$value;
+            }
+        }
+        return $table;
     }
     public function publicIp(){
         // $ch = curl_init('http://www.ip138.com/ip2city.asp');
@@ -103,19 +124,20 @@ class App{
             echo ($name.'创建完成！');
         }
     }
-    public function Select($table){
-        $users=$this->db->paginate($this->prefix.$table,$this->params['page'],$this->params['pageSize']);
+    public function Select($condition){
+        foreach($condition as $key => $value){
+            $this->db->where($key,$value);
+        }
+        $users=$this->db->paginate($this->prefix.$this->getTable(),$this->params['page'],$this->params['pageSize']);
         echo $this->jsonp.'('.json_encode($users).')';
     }
-    public function Classify($table){
-
-    }
-    public function Insert($table,$data){
-        $id=$this->db->insert($this->prefix.$table,$data);
+    public function Insert($callback){
+        $id=$this->db->insert($this->prefix.$this->getTable(),$this->params);
         if($id){
             $result=array(
                 'id'=>$id
             );
+            $callback();
         }else{
             $result=array(
                 'id'=>null
@@ -123,26 +145,12 @@ class App{
         }
         echo $this->jsonp.'('.json_encode($result).')';
     }
-    public function Register($table){
-        $data=$this->params;
-        $data['ip']=$this->publicIp();
-        $data['browser']=$this->Browser();
-        $data['platform']=$this->GetOs();
-        $this->Insert($table,$data);
-        $regData=Array(
-            'username'=>$data['username'],
-            'type'=>'注册',
-            'time'=>date('y-m-d h:i:s',time()),
-            'ip'=>$this->publicIp()
-        );
-        $this->Insert('log',$regData);
-    }
-    public function Check($table){
+    public function Check(){
         $data=$this->getParams();
         foreach($data as $key=>$value){
             $this->db->where($key,$value);
         }
-        $id=$this->db->has($this->prefix.$table);
+        $id=$this->db->has($this->prefix.$this->getTable());
         if($id){
             $result=array(
                 'result'=>$id

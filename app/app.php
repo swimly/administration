@@ -8,13 +8,16 @@ switch($api){
     $app->Init();
   break;
   case 'get_list':
-    $app->Select('users');
+    $condition=$app->classify();
+    $app->Select($condition);
   break;
   case 'register':
-    $app->Register('users');
+    $app->Insert(function(){
+      
+    });
   break;
-  case 'login':
-    $app->Check('users');
+  case 'check':
+    $app->Check();
   break;
 }
 ?>

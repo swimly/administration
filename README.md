@@ -28,4 +28,9 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-add
+## api接口说明：
+所有数据请求都是app.php通过改变 ?api后面的参数调用不同的功能模块：
+获取列表
+```
+http://192.168.4.151/administration/app/app.php?api=get_list
+```
