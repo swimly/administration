@@ -8,13 +8,13 @@ switch($api){
     $app->Init();
   break;
   case 'get_list':
-    $app->getList('users');
+    $app->Select('users');
   break;
   case 'register':
     $app->Register('users');
   break;
   case 'login':
-    $app->Login('users');
+    $app->Check('users');
   break;
 }
 ?>

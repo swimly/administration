@@ -15,12 +15,23 @@ $tables = Array (
         'position'=> 'int(2)',
         'name'=> 'char(10)',
         'password'=> 'char(50)',
+        'ip'=>'char(15)',
+        'platform'=>"char(20)",
+        'browser'=>'char(20)',
+        'regAddress'=>'char(10)',
+        'address'=>'char(40)',
         'regTime'=> 'datetime',
         'joinTime'=> 'datetime',
         'birthday'=> 'datetime',
         'expires' => 'datetime',
         'loginCount' => 'int(10) default 0',
         'unique key' => 'login (login)'
+    ),
+    'log'=>Array(
+        'username'=>'char(10) not null',
+        'type'=>'char(10)',
+        'time'=>'datetime',
+        'ip'=>'char(20)'
     )
 );
 ?>
