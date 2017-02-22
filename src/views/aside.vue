@@ -15,10 +15,12 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import config from '../config'
 export default {
   name: 'header',
   components: {
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    config
   },
   props: {
     menu: {

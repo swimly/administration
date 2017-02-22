@@ -36,19 +36,23 @@ const config = {
     }]
   }, {
     text: '数据库',
-    url: '/user/count',
+    url: '/database/list',
     icon: 'icon-database',
     sub: [{
-      text: '统计',
-      url: '/user/count',
+      text: '数据库配置',
+      url: '/database/setting',
       icon: ''
     }, {
-      text: '分类',
-      url: '/user/catory',
+      text: '数据库列表',
+      url: '/database/list',
+      icon: ''
+    }, {
+      text: '新增数据库',
+      url: '/database/add',
       icon: ''
     }, {
       text: '列表',
-      url: '/user/list',
+      url: '/database/list',
       icon: ''
     }]
   }]
