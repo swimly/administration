@@ -1,5 +1,5 @@
 const config = {
-  service: 'http://192.168.4.151/administration/app/app.php',
+  service: 'http://localhost/administration/app/app.php',
   logo: '这是logo',
   user: 'admin',
   depart: ['全部','总经办','研发部门','财务部'],
@@ -32,6 +32,23 @@ const config = {
     }, {
       text: '列表',
       url: '/user/list',
+      icon: ''
+    }]
+  }, {
+    text: '项目管理',
+    url: '/project/count',
+    icon: 'icon-fenzu',
+    sub: [{
+      text: '统计',
+      url: '/project/count',
+      icon: ''
+    }, {
+      text: '分类',
+      url: '/project/catory',
+      icon: ''
+    }, {
+      text: '列表',
+      url: '/project/list',
       icon: ''
     }]
   }, {
