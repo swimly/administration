@@ -1,6 +1,20 @@
 <template>
   <div class="content has-search">
     <table class="form-table search w">
+      <colgroup>
+        <col width="5%">
+        <col width="10%">
+        <col width="5%">
+        <col width="10%">
+        <col width="5%">
+        <col width="15%">
+        <col width="5%">
+        <col width="10%">
+        <col width="5%">
+        <col width="10%">
+        <col width="5%">
+        <col width="5%">
+      </colgroup>
       <tr>
         <th>姓名：</th>
         <td>
@@ -17,12 +31,17 @@
         <th>性别：</th>
         <td>
           <div class="form">
-            <input v-model="search.sex" value="0" class="fs-18 c-9" type="radio" id="s1">
+            <input v-model="search.sex" value="0" class="fs-18 c-9" type="radio" id="s0">
+            <span></span>
+            <label for="s0">不限</label>
+          </div>
+          <div class="form">
+            <input v-model="search.sex" value="1" class="fs-18 c-9" type="radio" id="s1">
             <span></span>
             <label for="s1">男</label>
           </div>
           <div class="form">
-            <input v-model="search.sex" value="1" class="fs-18 c-9" type="radio" id="s2">
+            <input v-model="search.sex" value="2" class="fs-18 c-9" type="radio" id="s2">
             <span></span>
             <label for="s2">女</label>
           </div>
@@ -43,7 +62,8 @@
             </select>
           </div>
         </td>
-        <td><span class="btn btn-blue fs-14" v-on:click="query">查询</span></td>
+        <td class="p-0"><span class="btn btn-orange fs-14" v-on:click="reset">重置</span></td>
+        <td class="p-0"><span class="btn btn-blue fs-14" v-on:click="query">查询</span></td>
       </tr>
     </table>
     <table class="list w hd">
@@ -111,10 +131,10 @@
         <span>当前：第<i class="num">{{page}}</i>页</span>
       </div>
       <div class="col v-m t-r">
-        <router-link to="1" >首页</router-link>
-        <a v-on:click="prev" >上一页</a>
-        <a v-on:click="next" >下一页</a>
-        <router-link :to="totalPage.toString()" >末页</router-link>
+        <router-link to="1" :class="page==1?'none':''">首页</router-link>
+        <a :class="page==1?'none':''" v-on:click="prev" >上一页</a>
+        <a v-on:click="next"  :class="page==totalPage?'none':''">下一页</a>
+        <router-link :to="totalPage.toString()"  :class="page==totalPage?'none':''">末页</router-link>
       </div>
     </div>
   </div>
@@ -167,16 +187,28 @@ export default {
       this.$router.push('' + this.page)
     },
     list: function () {
+      let send = {
+        api: 'select',
+        callback: 'callback',
+        table: 'users',
+        page: parseInt(this.$route.params.page),
+        pageSize: this.pageSize,
+        name: this.search.name,
+        username: this.search.username,
+        sex: this.search.sex,
+        depart: this.search.ds,
+        position: this.search.ps
+      }
+      for(var i in send){
+        if(send[i]==0 || send[i]==''){
+          delete send[i]
+        }
+      }
+      console.log(send)
       this.$http.jsonp(config.service,{
         headers: {
         },
-        params: {
-          api: 'select',
-          callback: 'callback',
-          table: 'users',
-          page: parseInt(this.$route.params.page),
-          pageSize: this.pageSize
-        },
+        params: send,
         emulateJSON: true,
         before: function (req) {
         }
@@ -188,14 +220,25 @@ export default {
       )
     },
     num: function () {
+      let send = {
+        api: 'count',
+        callback: 'callback',
+        table: 'users',
+        name: this.search.name,
+        username: this.search.username,
+        sex: this.search.sex,
+        depart: this.search.ds,
+        position: this.search.ps
+      }
+      for(var i in send){
+        if(send[i]==0 || send[i]==''){
+          delete send[i]
+        }
+      }
       this.$http.jsonp(config.service,{
         headers: {
         },
-        params: {
-          api: 'count',
-          callback: 'callback',
-          table: 'users'
-        },
+        params: send,
         emulateJSON: true,
         before: function (req) {
         }
@@ -212,7 +255,7 @@ export default {
         api: 'select',
         callback: 'callback',
         table: 'users',
-        page: parseInt(this.$route.params.page),
+        page: 1,
         pageSize: this.pageSize,
         name: this.search.name,
         username: this.search.username,
@@ -220,24 +263,19 @@ export default {
         depart: this.search.ds,
         position: this.search.ps
       }
+      for(var i in send){
+        if(send[i]==0 || send[i]==''){
+          delete send[i]
+        }
+      }
+      this.num()
       this.$http.jsonp(config.service,{
         headers: {
         },
-        params: {
-          api: 'select',
-          callback: 'callback',
-          table: 'users',
-          page: parseInt(this.$route.params.page),
-          pageSize: this.pageSize,
-          name: this.search.name,
-          username: this.search.username,
-          sex: this.search.sex,
-          depart: this.search.ds,
-          position: this.search.ps
-        },
+        params: send,
         emulateJSON: true,
         before: function (req) {
-          console.log(req)
+          this.$router.push('' + 1)
         }
       }).then(
         function (res) {
@@ -245,6 +283,16 @@ export default {
         },
         function (res) {}
       )
+    },
+    reset: function () {
+      this.search.name = ''
+      this.search.username = ''
+      this.search.sex = 0
+      this.search.ds = 0
+      this.search.ps = 0
+      this.$router.push('' + 1)
+      this.list()
+      this.num()
     }
   },
   watch: {
@@ -259,18 +307,21 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .list{border:1px solid #eee;table-layout: fixed;border-collapse: collapse;border-spacing: 0;}
-.list th{font-weight:normal;font-size:16px;color:#666;height:40px;background:#EDEDED;border:1px solid #eee;}
-.list td{font-size:14px;padding:0.8em 1em;color:#666;border:1px solid #eee;}
+.list th{font-weight:normal;font-size:14px;color:#666;height:50px;background:#FFE3B9;}
+.list td{font-size:14px;padding:0.6em 1em;color:#666;border:1px solid #eee;}
 .list tr:nth-child(odd){background:#f9f9f9;}
 .list tr:hover{background:#FCF7D6;}
-.content{padding:40px 0 40px 0;overflow:hidden;}
-.content.has-search{padding-top:100px;}
-.content.has-search .search{margin-top:-100px;height:60px;padding:0 2em;}
+.content{padding:50px 0 40px 0;overflow:hidden;}
+.content.has-search{padding-top:110px;}
+.content.has-search .search{margin-top:-110px;height:60px;padding:0 2em;}
 .content.has-search .hd{margin-top:0;}
-.content .hd{margin-top:-40px;}
+.content .hd{margin-top:-50px;}
 .content .bd{height:100%;overflow:auto;}
-.content .fd{height:40px;border-top:1px solid #eee;}
-.content .fd span,.content .fd a{font-size:14px;color:#999;padding:0 1em;cursor: pointer;}
+.content .fd{height:40px;border-top:1px solid #eee;padding:0 1em;}
+.content .fd span{font-size:14px;color:#999;padding:0 1em;cursor: pointer;}
+.content .fd a{display:inline-block;font-size:14px;color:#999;border:1px solid #ccc;padding:0.2em 1em;border-radius:3px;cursor: pointer;transition:0.3s;}
+.content .fd a:hover{background:#559EFE;color:#fff;border-color:#559EFE;}
+.content .fd a.none{color:#ccc;border-color:#ccc;background:#f0f0f0;cursor:not-allowed;}
 .content .fd .num{color:#559EFE;font-style:normal;padding:0 0.5em;}
 .list .iconfont{font-size:1.6em;color:#447DC8;margin:0 5px;}
 .scroll-area {position: relative;}
