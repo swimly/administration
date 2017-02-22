@@ -30,7 +30,6 @@ $tables = Array (
     'projects'=>Array(
         'title'=>'char(30)',
         'author'=>'char(10)',
-        'join'=>'char(100)',
         'startTime'=>'datetime',
         'endTime'=>'datetime',
         'cover'=>'char(50)',
@@ -41,6 +40,13 @@ $tables = Array (
         'tag'=>'char(50)',
         'see'=>'int(6) default 0',
         'download'=>'int(6) default 0'
+    ),
+    'join'=>Array(
+        'project'=>'int(4)',
+        'people'=>'char(10)',
+        'duty'=>'int(2)',
+        'addTime'=>'datetime',
+        'total'=>'int(2)'
     ),
     'log'=>Array(
         'username'=>'char(10) not null',

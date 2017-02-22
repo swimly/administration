@@ -93,7 +93,9 @@
       </tr>
     </table>
     <div class="bd">
-      <table class="list w">
+      <my-loading v-if="isloading"></my-loading>
+      <my-null v-if="isnull"></my-null>
+      <table class="list w" v-if="!isloading">
         <colgroup>
           <col width="5%">
           <col width="10%">
@@ -143,11 +145,15 @@
 <script>
 import config from '../config'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import loading from '../components/loading'
+import nodata from '../components/null'
 export default {
   name: 'header',
   data () {
     return {
       data: null,
+      isloading: false,
+      isnull: true,
       page: parseInt(this.$route.params.page),
       total: 0,
       totalPage: 0,
@@ -168,7 +174,9 @@ export default {
   },
   components: {
     config,
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    'my-loading': loading,
+    'my-null': nodata
   },
   created () {
     this.list()
@@ -211,10 +219,17 @@ export default {
         params: send,
         emulateJSON: true,
         before: function (req) {
+          this.isloading = true
         }
       }).then(
         function (res) {
           this.data = res.body
+          this.isloading = false
+          if(res.body.length==0){
+            this.isnull = true
+          }else {
+            this.isnull = false
+          }
         },
         function (res) {}
       )
@@ -276,10 +291,17 @@ export default {
         emulateJSON: true,
         before: function (req) {
           this.$router.push('' + 1)
+          this.isloading = true
         }
       }).then(
         function (res) {
           this.data = res.body
+          this.isloading = false
+          if(res.body==0){
+            this.isnull = true
+          }else{
+            this.isnull = false
+          }
         },
         function (res) {}
       )
