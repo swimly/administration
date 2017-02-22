@@ -131,6 +131,16 @@ class App{
         $users=$this->db->paginate($this->prefix.$this->getTable(),$this->params['page'],$this->params['pageSize']);
         return $this->jsonp.'('.json_encode($users).')';
     }
+    public function Count($condition){
+        foreach($condition as $key => $value){
+            $this->db->where($key,$value);
+        }
+        $users=$this->db->get($this->prefix.$this->getTable());
+        $result=array(
+            'count'=>$this->db->count
+        );
+        return $this->jsonp.'('.json_encode($result).')';
+    }
     public function Insert(){
         $id=$this->db->insert($this->prefix.$this->getTable(),$this->params);
         if($id){

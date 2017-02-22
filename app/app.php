@@ -28,5 +28,10 @@ switch($api){
     $value=$app->Delete();
     echo $value;
   break;
+  case 'count':
+    $condition=$app->classify();
+    $value=$app->Count($condition);
+    echo $value;
+  break;
 }
 ?>

@@ -47,7 +47,12 @@ export default new Router({
     }, {
       path: '/user/list',
       name: 'userlist',
-      component: UserList
+      redirect: '/user/list/1',
+      component: UserList,
+    }, {
+      path: '/user/list/:page',
+      name: 'userlist',
+      component: UserList,
     }, {
       path: '/database/list',
       name: 'databaselist',
