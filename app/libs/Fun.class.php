@@ -134,8 +134,9 @@ class App{
     public function Like($condition){
         $pageSize=$this->params['pageSize'];
         $page=($this->params['page']-1)*$pageSize;
-        if(isset($_GET['startTime']) || isset($_GET['endTime'])){
+        if(isset($_GET['startTime'])){
             $startTime=$_GET['startTime'];
+        }elseif(isset($_GET['endTime'])){
             $endTime=$_GET['endTime'];
         }else{
             $startTime='1965-01-01 00:00:00';
