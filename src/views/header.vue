@@ -49,7 +49,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.header{height:80px;margin:-80px 0 0 -200px;background:#559EFE;}
+.header{height:80px;margin:-80px 0 0 -200px;background:#242D3C;}
 .logo{font-size:0;background:url(../assets/logo.png) no-repeat 20px center;display:inline-block;height:50px;width:400px;vertical-align: middle;}
 .user{font-size:1.4em;color:#fff;}
 .user a{color:#fff;margin-right:1em;padding-left:1em;}

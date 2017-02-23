@@ -44,13 +44,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.aside{width:200px;margin:0 0 0 -200px;height:100%;background:#447DC8;display:inline-block;float:left;}
-.menu .parent{font-size:1.5em;color:#fff;padding:1em;border-bottom:1px solid #5E91D0;}
+.aside{width:200px;margin:0 0 0 -200px;height:100%;background:#2C3440;display:inline-block;float:left;}
+.menu .parent{font-size:1.5em;color:#fff;padding:1em;border-bottom:1px solid #343B4B;}
 .menu .parent .col{text-align:left;}
 .menu .parent .iconfont{width:20%;text-align:center;}
 .menu .parent .iconfont:before{position:relative;top:2px;}
-.menu .sub{padding:1em;background:#3F73B8;border-bottom:1px solid #5E91D0;}
-.menu .sub .son{display:block;font-size:1.3em;color:#b8dbff;padding:0.5em 1em 0.5em 3em;}
+.menu .sub{padding:1em;background:#3B4350;border-bottom:1px solid #343B4B;}
+.menu .sub .son{display:block;font-size:1.3em;color:#E0E0E0;padding:0.5em 1em 0.5em 3em;}
 .menu .sub .router-link-active{color:#fff;}
 .scroll-area {position: relative;}
 .ps-container>.ps-scrollbar-y-rail{width:6px;}
