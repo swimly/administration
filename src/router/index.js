@@ -10,6 +10,7 @@ import UserList from 'views/userList'
 import Chart from 'components/chart'
 import DatabaseList from 'views/databaseList'
 import DatabaseSetting from 'views/databaseSetting'
+import ProjectList from 'views/projectList'
 
 Vue.use(Router)
 
@@ -53,6 +54,15 @@ export default new Router({
       path: '/user/list/:page',
       name: 'userlist',
       component: UserList,
+    }, {
+      path: '/project/list',
+      name: 'userlist',
+      redirect: '/project/list/1',
+      component: ProjectList,
+    }, {
+      path: '/project/list/:page',
+      name: 'userlist',
+      component: ProjectList,
     }, {
       path: '/database/list',
       name: 'databaselist',

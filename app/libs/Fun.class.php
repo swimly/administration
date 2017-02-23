@@ -131,6 +131,24 @@ class App{
         $users=$this->db->paginate($this->prefix.$this->getTable(),$this->params['page'],$this->params['pageSize']);
         return $this->jsonp.'('.json_encode($users).')';
     }
+    public function Like($condition){
+        $page=$this->params['page'];
+        $pageSize=$this->params['pageSize'];
+        $Last=end($condition);
+        $q="select * from ".$this->prefix.$this->getTable()." where ";
+        foreach($condition as $k=>$v){
+            $q.="$k LIKE '%".$v."%' and ";
+            if($Last===$v){
+                $q.="$k LIKE '%".$v."%' ";
+            }
+        }
+        $q.="LIMIT $page,$pageSize";
+        $result=$this->db->rawQuery($q);
+        echo $q;
+        return $result;
+        // $users=$this->db->paginate($this->prefix.$this->getTable(),$this->params['page'],$this->params['pageSize']);
+        // return $this->jsonp.'('.json_encode($users).')';
+    }
     public function Count($condition){
         foreach($condition as $key => $value){
             $this->db->where($key,$value);

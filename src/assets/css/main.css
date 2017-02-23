@@ -20,7 +20,7 @@ a{text-decoration:none;}
 .form{display:inline-block;}
 .form input[type=text]{font-size:14px;border:1px solid #ccc;padding:0.5em 1em;border-radius:0.3em;width:100%;transition:0.3s;}
 .form input[type=text]:focus{transform: translateY(-2px);box-shadow:0 2px 5px #ccc;}
-.form select{font-size:14px;padding:0.5em 1em;border-radius:0.3em;border:1px solid #ccc;font-family:"微软雅黑";color:#666;}
+.form select{font-size:14px;padding:0.5em 1em;border-radius:0.3em;border:1px solid #ccc;font-family:"微软雅黑";color:#666;width:100%;}
 .form-table th{font-weight:normal;font-size:1.4em;color:#666;text-align:right;}
 .form-table td{padding:0.5em 1em;}
 .btn{display:inline-block;padding:0.5em 2em;color:#fff;border-radius:0.3em;cursor: pointer;}

@@ -33,5 +33,10 @@ switch($api){
     $value=$app->Count($condition);
     echo $value;
   break;
+  case 'like':
+    $condition=$app->classify();
+    $value=$app->Like($condition);
+    var_dump($value);
+  break;
 }
 ?>

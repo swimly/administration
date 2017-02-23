@@ -4,6 +4,7 @@ const config = {
   user: 'admin',
   depart: ['全部','总经办','研发部门','财务部'],
   position: ['全部','董事长','总经理','部门经理','小组长','员工'],
+  projectType: ['全部','app','系统','网站','字体','画册','flash','视频','其他'],
   nav: [{
     icon: 'icon-password',
     text: '修改密码',
@@ -37,7 +38,7 @@ const config = {
   }, {
     text: '项目管理',
     url: '/project/count',
-    icon: 'icon-fenzu',
+    icon: 'icon-project',
     sub: [{
       text: '统计',
       url: '/project/count',
