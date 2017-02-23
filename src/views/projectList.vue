@@ -38,12 +38,12 @@
         <th>开始时间段：</th>
         <td>
           <div class="form w">
-            <input v-model="search.startTime" class="fs-18 c-9" type="text">
+            <datepicker v-model="search.startTime"></datepicker>
           </div>
         </td>
         <td>
           <div class="form w">
-            <input v-model="search.endTime" class="fs-18 c-9" type="text">
+            <datepicker v-model="search.endTime"></datepicker>
           </div>
         </td>
         <td class="p-0"><span class="btn btn-orange fs-14" v-on:click="reset">重置</span></td>
@@ -131,6 +131,7 @@ import config from '../config'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import loading from '../components/loading'
 import nodata from '../components/null'
+import datepicker from 'vue-date'
 export default {
   name: 'projectList',
   data () {
@@ -159,7 +160,8 @@ export default {
     config,
     VuePerfectScrollbar,
     'my-loading': loading,
-    'my-null': nodata
+    'my-null': nodata,
+    datepicker
   },
   created () {
     this.list()
@@ -280,6 +282,7 @@ export default {
         function (res) {
           this.data = res.body
           this.isloading = false
+          console.log(res.body)
           if(res.body==0){
             this.isnull = true
           }else{
