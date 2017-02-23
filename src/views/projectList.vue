@@ -35,7 +35,7 @@
             </select>
           </div>
         </td>
-        <th>起止时间：</th>
+        <th>开始时间段：</th>
         <td>
           <div class="form w">
             <input v-model="search.startTime" class="fs-18 c-9" type="text">
@@ -195,7 +195,6 @@ export default {
           delete send[i]
         }
       }
-      console.log(send)
       this.$http.jsonp(config.service,{
         headers: {
         },
@@ -224,7 +223,7 @@ export default {
         table: 'projects',
         title: this.search.title,
         author: this.search.author,
-        classify: this.search.classify,
+        classify: this.search.cs,
         startTime: this.search.startTime,
         endTime: this.search.endTime
       }
@@ -250,14 +249,14 @@ export default {
     },
     query: function () {
       let send = {
-        api: 'select',
+        api: 'like',
         callback: 'callback',
         table: 'projects',
         page: 1,
         pageSize: this.pageSize,
         title: this.search.title,
         author: this.search.author,
-        classify: this.search.classify,
+        classify: this.search.cs,
         startTime: this.search.startTime,
         endTime: this.search.endTime
       }
@@ -275,6 +274,7 @@ export default {
         before: function (req) {
           this.$router.push('' + 1)
           this.isloading = true
+          console.log(req)
         }
       }).then(
         function (res) {

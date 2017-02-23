@@ -36,7 +36,7 @@ switch($api){
   case 'like':
     $condition=$app->classify();
     $value=$app->Like($condition);
-    var_dump($value);
+    echo($value);
   break;
 }
 ?>

@@ -132,22 +132,33 @@ class App{
         return $this->jsonp.'('.json_encode($users).')';
     }
     public function Like($condition){
-        $page=$this->params['page'];
         $pageSize=$this->params['pageSize'];
+        $page=($this->params['page']-1)*$pageSize;
+        if(isset($_GET['startTime']) || isset($_GET['endTime'])){
+            $startTime=$_GET['startTime'];
+            $endTime=$_GET['endTime'];
+        }else{
+            $startTime='1965-01-01 00:00:00';
+            $endTime='2100-01-01 00:00:00';
+        }  
         $Last=end($condition);
         $q="select * from ".$this->prefix.$this->getTable()." where ";
         foreach($condition as $k=>$v){
-            $q.="$k LIKE '%".$v."%' and ";
             if($Last===$v){
                 $q.="$k LIKE '%".$v."%' ";
+            }else{
+                if($k=='startTime'){
+                    $q.="$k > '".$v."' and ";
+                }elseif($k=='endTime'){
+                    $q.="startTime < '".$v."' and ";
+                }else{
+                    $q.="$k LIKE '%".$v."%' and ";
+                }
             }
         }
         $q.="LIMIT $page,$pageSize";
         $result=$this->db->rawQuery($q);
-        echo $q;
-        return $result;
-        // $users=$this->db->paginate($this->prefix.$this->getTable(),$this->params['page'],$this->params['pageSize']);
-        // return $this->jsonp.'('.json_encode($users).')';
+        return $this->jsonp.'('.json_encode($result).')';
     }
     public function Count($condition){
         foreach($condition as $key => $value){
