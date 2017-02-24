@@ -146,7 +146,11 @@ class App{
         $q="select * from ".$this->prefix.$this->getTable()." where ";
         foreach($condition as $k=>$v){
             if($Last===$v){
-                $q.="$k LIKE '%".$v."%' ";
+                if($k=='endTime'){
+                    $q.="startTime < '".$v."' ";
+                }else{
+                    $q.="$k LIKE '%".$v."%' ";
+                }
             }else{
                 if($k=='startTime'){
                     $q.="$k > '".$v."' and ";
