@@ -33,9 +33,14 @@ switch($api){
     $value=$app->Count($condition);
     echo $value;
   break;
-  case 'like':
+  case 'query_projects':
     $condition=$app->classify();
-    $value=$app->Like($condition);
+    $value=$app->Like($condition,'startTime');
+    echo($value);
+  break;
+  case 'query_users':
+    $condition=$app->classify();
+    $value=$app->Like($condition,'regTime');
     echo($value);
   break;
 }

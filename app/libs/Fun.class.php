@@ -131,7 +131,7 @@ class App{
         $users=$this->db->paginate($this->prefix.$this->getTable(),$this->params['page'],$this->params['pageSize']);
         return $this->jsonp.'('.json_encode($users).')';
     }
-    public function Like($condition){
+    public function Like($condition,$time){
         $pageSize=$this->params['pageSize'];
         $page=($this->params['page']-1)*$pageSize;
         if(isset($_GET['startTime'])){
@@ -147,15 +147,15 @@ class App{
         foreach($condition as $k=>$v){
             if($Last===$v){
                 if($k=='endTime'){
-                    $q.="startTime < '".$v."' ";
+                    $q.="$time < '".$v."' ";
                 }else{
                     $q.="$k LIKE '%".$v."%' ";
                 }
             }else{
                 if($k=='startTime'){
-                    $q.="$k > '".$v."' and ";
+                    $q.="$time > '".$v."' and ";
                 }elseif($k=='endTime'){
-                    $q.="startTime < '".$v."' and ";
+                    $q.="$time < '".$v."' and ";
                 }else{
                     $q.="$k LIKE '%".$v."%' and ";
                 }

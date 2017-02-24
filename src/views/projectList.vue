@@ -95,13 +95,13 @@
         <tr v-for="(item, index) in data">
           <td v-text="index+1" align="center"></td>
           <td v-text="item.title" align="left"></td>
-          <td v-text="item.classify" align="center"></td>
+          <td v-text="tp(item.classify)" align="center"></td>
           <td v-text="item.author" align="center"></td>
           <td v-text="item.startTime" align="center"></td>
           <td v-text="item.endTime" align="center"></td>
           <td v-text="item.github" align="center"></td>
           <td v-text="item.preview" align="center"></td>
-          <td v-text="item.tag" align="center"></td>
+          <td v-html="tag(item.tag)" align="center"></td>
           <td align="center">
             <a href="javascript:;" title="查看" class="iconfont icon-search"></a>
             <a href="javascript:;" title="编辑" class="iconfont icon-edit"></a>
@@ -168,6 +168,17 @@ export default {
     this.num()
   },
   methods: {
+    tag: function (str) {
+      let arr = str.split(',')
+      let strs = ''
+      for(var i = 0; i< arr.length; i++){
+        strs += '<span class="tag">' + arr[i] + '</span>'
+      }
+      return strs
+    },
+    tp: function (num) {
+      return config.projectType[num]
+    },
     scrollHanle(evt) {
       //console.log(evt)
     },
@@ -251,7 +262,7 @@ export default {
     },
     query: function () {
       let send = {
-        api: 'like',
+        api: 'query_projects',
         callback: 'callback',
         table: 'projects',
         page: 1,

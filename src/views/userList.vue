@@ -2,15 +2,19 @@
   <div class="content has-search">
     <table class="form-table search w">
       <colgroup>
+        <col width="3%">
+        <col width="7%">
+        <col width="5%">
+        <col width="7%">
+        <col width="3%">
+        <col width="10%">
+        <col width="3%">
+        <col width="7%">
+        <col width="3%">
+        <col width="7%">
         <col width="5%">
         <col width="10%">
-        <col width="5%">
-        <col width="10%">
-        <col width="5%">
-        <col width="15%">
-        <col width="5%">
-        <col width="10%">
-        <col width="5%">
+        <col width="1%">
         <col width="10%">
         <col width="5%">
         <col width="5%">
@@ -62,6 +66,14 @@
             </select>
           </div>
         </td>
+        <th>注册时间：</th>
+        <td>
+          <datepicker v-model="search.startTime"></datepicker>
+        </td>
+        <th>至</th>
+        <td>
+          <datepicker v-model="search.endTime"></datepicker>
+        </td>
         <td class="p-0"><span class="btn btn-orange fs-14" v-on:click="reset">重置</span></td>
         <td class="p-0"><span class="btn btn-blue fs-14" v-on:click="query">查询</span></td>
       </tr>
@@ -85,7 +97,7 @@
         <th>用户名</th>
         <th>性别</th>
         <th>部门</th>
-        <th>注册ip</th>
+        <th>注册时间</th>
         <th>平台</th>
         <th>职位</th>
         <th>邮箱</th>
@@ -112,11 +124,11 @@
           <td v-text="index+1" align="center"></td>
           <td v-text="item.name" align="left"></td>
           <td v-text="item.username" align="left"></td>
-          <td v-text="item.sex" align="center"></td>
-          <td v-text="item.depart" align="center"></td>
-          <td v-text="item.ip" align="center"></td>
+          <td v-text="sex(item.sex)" align="center"></td>
+          <td v-text="dep(item.depart)" align="center"></td>
+          <td v-text="item.regTime" align="center"></td>
           <td v-text="item.platform" align="center"></td>
-          <td v-text="item.position" align="center"></td>
+          <td v-text="pos(item.position)" align="center"></td>
           <td v-text="item.email" align="center"></td>
           <td align="center">
             <a href="javascript:;" title="查看" class="iconfont icon-search"></a>
@@ -147,6 +159,7 @@ import config from '../config'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import loading from '../components/loading'
 import nodata from '../components/null'
+import datepicker from 'vue-date'
 export default {
   name: 'header',
   data () {
@@ -168,7 +181,9 @@ export default {
         username: '',
         sex: 0,
         ds: 0,
-        ps: 0
+        ps: 0,
+        startTime: '',
+        endTime: ''
       }
     }
   },
@@ -176,13 +191,23 @@ export default {
     config,
     VuePerfectScrollbar,
     'my-loading': loading,
-    'my-null': nodata
+    'my-null': nodata,
+    datepicker
   },
   created () {
     this.list()
     this.num()
   },
   methods: {
+    pos: function (num) {
+      return config.ps[num]
+    },
+    dep: function (num) {
+      return config.ds[num]
+    },
+    sex: function (num) {
+      return config.sex[num]
+    },
     scrollHanle(evt) {
       //console.log(evt)
     },
@@ -205,7 +230,9 @@ export default {
         username: this.search.username,
         sex: this.search.sex,
         depart: this.search.ds,
-        position: this.search.ps
+        position: this.search.ps,
+        startTime: this.search.startTime,
+        endTime: this.search.endTime
       }
       for(var i in send){
         if(send[i]==0 || send[i]==''){
@@ -243,7 +270,9 @@ export default {
         username: this.search.username,
         sex: this.search.sex,
         depart: this.search.ds,
-        position: this.search.ps
+        position: this.search.ps,
+        startTime: this.search.startTime,
+        endTime: this.search.endTime
       }
       for(var i in send){
         if(send[i]==0 || send[i]==''){
@@ -267,7 +296,7 @@ export default {
     },
     query: function () {
       let send = {
-        api: 'select',
+        api: 'query_users',
         callback: 'callback',
         table: 'users',
         page: 1,
@@ -276,7 +305,9 @@ export default {
         username: this.search.username,
         sex: this.search.sex,
         depart: this.search.ds,
-        position: this.search.ps
+        position: this.search.ps,
+        startTime: this.search.startTime,
+        endTime: this.search.endTime
       }
       for(var i in send){
         if(send[i]==0 || send[i]==''){
