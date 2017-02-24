@@ -1,5 +1,8 @@
 <template>
   <div class="content has-search">
+    <transition v-if="showalert" name="fade" mode="out-in">
+      <alert title="删除" content="您是否确认删除此条记录！" :confirm="deled" :cancel="cancel"></alert>
+    </transition>
     <table class="form-table search w">
       <colgroup>
         <col width="3%">
@@ -133,7 +136,7 @@
           <td align="center">
             <a href="javascript:;" title="查看" class="iconfont icon-search"></a>
             <a href="javascript:;" title="编辑" class="iconfont icon-edit"></a>
-            <a href="javascript:;" title="删除" class="iconfont icon-delete"></a>
+            <a href="javascript:;" :row="item.id" title="删除" v-on:click="del(item.id)" class="iconfont icon-delete"></a>
           </td>
         </tr>
       </table>
@@ -160,6 +163,7 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import loading from '../components/loading'
 import nodata from '../components/null'
 import datepicker from 'vue-date'
+import alert from '../components/alert'
 export default {
   name: 'header',
   data () {
@@ -171,6 +175,8 @@ export default {
       total: 0,
       totalPage: 0,
       pageSize: 20,
+      showalert: false,
+      delid: null,
       position: config.position,
       depart: config.depart,
       settings: {
@@ -192,13 +198,48 @@ export default {
     VuePerfectScrollbar,
     'my-loading': loading,
     'my-null': nodata,
-    datepicker
+    datepicker,
+    alert
   },
   created () {
     this.list()
     this.num()
   },
   methods: {
+    deled: function () {
+      this.$http.jsonp(config.service,{
+        headers: {
+        },
+        params: {
+          api: 'delete',
+          id: this.delid,
+          table: 'users'
+        },
+        emulateJSON: true,
+        before: function (req) {
+        }
+      }).then(
+        function (res) {
+          const _this=this
+          if(res.body.res){
+            setTimeout(function(){
+              _this.list()
+              _this.num()
+            },200)
+          }
+        },
+        function (res) {}
+      )
+      this.showalert = false
+    },
+    cancel: function () {
+      console.log('取消')
+      this.showalert = false
+    },
+    del: function (id) {
+      this.showalert = true
+      this.delid = id
+    },
     pos: function (num) {
       return config.ps[num]
     },

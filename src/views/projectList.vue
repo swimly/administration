@@ -1,6 +1,8 @@
 <template>
   <div class="content has-search">
-    <alert title="删除" content="您是否确认删除此条记录！" :confirm="deled" :cancel="cancel" v-if="showalert"></alert>
+    <transition v-if="showalert" name="fade" mode="out-in">
+      <alert title="删除" content="您是否确认删除此条记录！" :confirm="deled" :cancel="cancel"></alert>
+    </transition>
     <table class="form-table search w">
       <colgroup>
         <col width="5%">
@@ -147,6 +149,7 @@ export default {
       pageSize: 20,
       show: false,
       showalert: false,
+      delid: null,
       projectType: config.projectType,
       settings: {
         minScrollbarLength: 60
@@ -173,22 +176,49 @@ export default {
     this.num()
   },
   methods: {
-    deled: function (e) {
-      console.log('删除'+e)
+    deled: function () {
+      this.$http.jsonp(config.service,{
+        headers: {
+        },
+        params: {
+          api: 'delete',
+          id: this.delid,
+          table: 'projects'
+        },
+        emulateJSON: true,
+        before: function (req) {
+        }
+      }).then(
+        function (res) {
+          const _this=this
+          if(res.body.res){
+            setTimeout(function(){
+              _this.list()
+              _this.num()
+            },200)
+          }
+        },
+        function (res) {}
+      )
+      this.showalert = false
     },
     cancel: function () {
       console.log('取消')
+      this.showalert = false
     },
     del: function (id) {
       this.showalert = true
+      this.delid = id
     },
     tag: function (str) {
-      let arr = str.split(',')
-      let strs = ''
-      for(var i = 0; i< arr.length; i++){
-        strs += '<span class="tag">' + arr[i] + '</span>'
+      if(str){
+        let arr = str.split(',')
+        let strs = ''
+        for(var i = 0; i< arr.length; i++){
+          strs += '<span class="tag">' + arr[i] + '</span>'
+        }
+        return strs
       }
-      return strs
     },
     tp: function (num) {
       return config.projectType[num]
