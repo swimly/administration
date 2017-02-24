@@ -1,5 +1,6 @@
 <template>
   <div class="content has-search">
+    <alert title="删除" content="您是否确认删除此条记录！" :confirm="deled" :cancel="cancel" v-if="showalert"></alert>
     <table class="form-table search w">
       <colgroup>
         <col width="5%">
@@ -103,9 +104,9 @@
           <td v-text="item.preview" align="center"></td>
           <td v-html="tag(item.tag)" align="center"></td>
           <td align="center">
-            <a href="javascript:;" title="查看" class="iconfont icon-search"></a>
-            <a href="javascript:;" title="编辑" class="iconfont icon-edit"></a>
-            <a href="javascript:;" title="删除" class="iconfont icon-delete"></a>
+            <a href="javascript:;" :row="item.id" title="查看" class="iconfont icon-search"></a>
+            <a href="javascript:;" :row="item.id" title="编辑" class="iconfont icon-edit"></a>
+            <a href="javascript:;" :row="item.id" title="删除" v-on:click="del(item.id)" class="iconfont icon-delete"></a>
           </td>
         </tr>
       </table>
@@ -132,6 +133,7 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import loading from '../components/loading'
 import nodata from '../components/null'
 import datepicker from 'vue-date'
+import alert from '../components/alert'
 export default {
   name: 'projectList',
   data () {
@@ -143,6 +145,8 @@ export default {
       total: 0,
       totalPage: 0,
       pageSize: 20,
+      show: false,
+      showalert: false,
       projectType: config.projectType,
       settings: {
         minScrollbarLength: 60
@@ -161,13 +165,23 @@ export default {
     VuePerfectScrollbar,
     'my-loading': loading,
     'my-null': nodata,
-    datepicker
+    datepicker,
+    alert
   },
   created () {
     this.list()
     this.num()
   },
   methods: {
+    deled: function (e) {
+      console.log('删除'+e)
+    },
+    cancel: function () {
+      console.log('取消')
+    },
+    del: function (id) {
+      this.showalert = true
+    },
     tag: function (str) {
       let arr = str.split(',')
       let strs = ''
